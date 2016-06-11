@@ -16,6 +16,7 @@ Example:
 """
 from __future__ import print_function
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+import atexit
 from collections import OrderedDict
 from glob import glob
 import json
@@ -27,6 +28,11 @@ import requests
 from six import iteritems
 
 GIST_TOKEN = os.environ['GIST_TOKEN']
+
+
+def _exit_handler():
+    print("Exiting")
+    return
 
 
 def _shorten_url(url):
@@ -89,8 +95,7 @@ Notes:
     return parser.parse_args()
 
 
-def _quickgist():
-    args = _get_args()
+def _process(args):
     file_map = OrderedDict()
 
     if args.sources:
@@ -117,6 +122,15 @@ def _quickgist():
         print(_create_gist(args.d, not args.p, file_map))
     else:
         sys.exit("Error: The source file(s) you specified is empty.")
+
+
+def _quickgist():
+    atexit.register(_exit_handler)
+    args = _get_args()
+    try:
+        _process(args)
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == "__main__":
