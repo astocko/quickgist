@@ -52,7 +52,7 @@ def _post_gist(gist_json):
         sys.exit("Error posting gist: " + res.text)
 
     content = json.loads(res.content.decode('utf-8'))
-    return _shorten_url(content['html_url'])
+    return content['html_url']
 
 
 def _create_gist(description, public, files):
@@ -78,7 +78,12 @@ def _get_args():
                         help='gist filename, only used for stdin '
                              'or to override single input filename')
     parser.add_argument('-d', type=str, default='', help='gist description')
-    parser.add_argument('-p', default=False, action='store_true', help='private gist')
+    parser.add_argument('-p', default=False, action='store_true',
+                        help='private gist')
+    parser.add_argument('-l', default=False, action='store_true',
+                        help='long url, will not shorten')
+    parser.add_argument('-nl', default=False, action='store_true',
+                        help='suppress newline after url, good for xclip')
     parser.epilog = """Examples:
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
@@ -118,7 +123,7 @@ def _process(args):
         file_map[args.f] = contents
 
     if file_map:
-        print(_create_gist(args.d, not args.p, file_map))
+        return _create_gist(args.d, not args.p, file_map)
     else:
         sys.exit("Error: The source file(s) you specified is empty.")
 
@@ -127,7 +132,15 @@ def _quickgist():
     atexit.register(_exit_handler)
     args = _get_args()
     try:
-        _process(args)
+        url = _process(args)
+
+        if not args.l:
+            url = _shorten_url(url)
+
+        if args.nl:
+            sys.stdout.write(url)
+        else:
+            print(url)
     except KeyboardInterrupt:
         pass
 
