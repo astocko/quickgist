@@ -1,5 +1,9 @@
 # quickgist
 
+quickgist is a simple command line tool for creating gists. Files can be
+specified as the sources argument or piped in via stdin. URLs are
+automatically shortened with git.io.
+
 ```
 usage: quickgist [-h] [-f F] [-d D] [-p P] [sources [sources ...]]
 
@@ -22,6 +26,8 @@ Examples:
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
     $ cat foo | quickgist -f foo.txt
+    $ xclip -sel clip -o | quickgist
+    $ quickgist -d "markdown" *.md | xclip -sel clip
 
 Notes:
     Please define an environment variable GIST_TOKEN with your
