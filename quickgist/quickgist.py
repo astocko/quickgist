@@ -46,7 +46,7 @@ def _post_gist(gist_json):
     if res.status_code != 201:
         sys.exit("Error posting gist: " + res.text)
 
-    content = json.loads(res.content)
+    content = json.loads(res.content.decode('utf-8'))
     return _shorten_url(content['html_url'])
 
 

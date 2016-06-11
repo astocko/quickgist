@@ -1,5 +1,6 @@
 # quickgist
 
+```
 usage: quickgist [-h] [-f F] [-d D] [-p P] [sources [sources ...]]
 
 quick gist posting tool
@@ -14,6 +15,7 @@ optional arguments:
               filename
   -d D        gist description
   -p P        private gist
+```
 
 Examples:
 

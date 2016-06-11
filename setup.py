@@ -11,5 +11,7 @@ setup(
     description='Command line tool for creating gists',
     entry_points={
         'console_scripts': [
-            'quickgist = quickgist.quickgist:_quickgist']}
+            'quickgist = quickgist.quickgist:_quickgist']},
+    install_requires=['orderedset >= 2.0', 'requests >= 2.10.0',
+                      'six >= 1.10.0']
 )
