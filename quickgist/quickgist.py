@@ -78,7 +78,7 @@ def _get_args():
                         help='gist filename, only used for stdin '
                              'or to override single input filename')
     parser.add_argument('-d', type=str, default='', help='gist description')
-    parser.add_argument('-p', type=bool, default=False, help='private gist')
+    parser.add_argument('-p', default=False, action='store_true', help='private gist')
     parser.epilog = """Examples:
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
