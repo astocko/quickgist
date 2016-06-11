@@ -31,8 +31,7 @@ GIST_TOKEN = os.environ['GIST_TOKEN']
 
 
 def _exit_handler():
-    print("Exiting")
-    return
+    pass
 
 
 def _shorten_url(url):
