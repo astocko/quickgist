@@ -27,7 +27,7 @@ from orderedset import OrderedSet
 import requests
 from six import iteritems
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 
 def _exit_handler():
