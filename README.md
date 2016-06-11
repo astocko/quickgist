@@ -26,8 +26,8 @@ Examples:
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
     $ cat foo | quickgist -f foo.txt
-    $ xclip -sel clip -o | quickgist
-    $ quickgist -d "markdown" *.md | xclip -sel clip
+    $ xclip -sel c -o | quickgist
+    $ quickgist -d "markdown" *.md | xclip -sel c
 
 Notes:
     Please define an environment variable GIST_TOKEN with your
