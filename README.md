@@ -14,6 +14,8 @@ automatically shortened with git.io.
     cd quickgist
     python setup.py install
 
+## Usage
+
 ```
 usage: quickgist [-h] [-f F] [-d D] [-p] [-l] [-nl] [sources [sources ...]]
 
