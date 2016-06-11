@@ -1,0 +1,4 @@
+orderedset == 2.0
+requests == 2.10.0
+setuptools == 18.0.1
+six == 1.10.0

@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """quickgist
 
 quickgist is a command line tool for creating gists. Files may be piped in
