@@ -4,6 +4,16 @@ quickgist is a simple command line tool for creating gists. Files can be
 specified as the sources argument or piped in via stdin. URLs are
 automatically shortened with git.io.
 
+## Install
+
+### pypi
+    pip install quickgist
+
+### source
+    git clone https://github.com/astocko/quickgist.git
+    cd quickgist
+    python setup.py install
+
 ```
 usage: quickgist [-h] [-f F] [-d D] [-p] [-l] [-nl] [sources [sources ...]]
 
@@ -23,7 +33,7 @@ optional arguments:
   -nl         suppress newline after url, good for xclip
 ```
 
-Examples:
+## Examples
 
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
@@ -31,7 +41,8 @@ Examples:
     $ xclip -sel c -o | quickgist
     $ quickgist -nl -d "markdown" *.md | xclip -sel c
 
-Notes: Please define an environment variable GIST_TOKEN with your GitHub
+## Notes
+Please define an environment variable GIST_TOKEN with your GitHub
 personal access token.
 
     $ export GIST_TOKEN="YOUR_TOKEN_HERE"
