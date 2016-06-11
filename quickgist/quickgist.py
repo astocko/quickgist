@@ -27,7 +27,10 @@ from orderedset import OrderedSet
 import requests
 from six import iteritems
 
-GIST_TOKEN = os.environ['GIST_TOKEN']
+try:
+    GIST_TOKEN = os.environ['GIST_TOKEN']
+except KeyError:
+    sys.exit("Please set $GIST_TOKEN to your GitHub personal access token.")
 
 
 def _exit_handler():
