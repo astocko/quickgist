@@ -9,6 +9,7 @@ setup(
     author='Alexander Stocko',
     author_email='as@coder.gg',
     description='Command line tool for creating gists',
+    keywords=['gist', 'github'],
     entry_points={
         'console_scripts': [
             'quickgist = quickgist.quickgist:_quickgist']},
