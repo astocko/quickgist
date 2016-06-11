@@ -17,7 +17,8 @@ automatically shortened with git.io.
 ## Usage
 
 ```
-usage: quickgist [-h] [-f F] [-d D] [-p] [-l] [-nl] [sources [sources ...]]
+usage: quickgist [-h] [-f F] [-d D] [-p] [-l] [-nl] [-v]
+                 [sources [sources ...]]
 
 quickgist is a simple command line tool for creating gists.
 
@@ -33,6 +34,7 @@ optional arguments:
   -p          private gist
   -l          long url, will not shorten
   -nl         suppress newline after url, good for xclip
+  -v          show program's version number and exit
 ```
 
 ## Examples

@@ -27,10 +27,7 @@ from orderedset import OrderedSet
 import requests
 from six import iteritems
 
-try:
-    GIST_TOKEN = os.environ['GIST_TOKEN']
-except KeyError:
-    sys.exit("Please set $GIST_TOKEN to your GitHub personal access token.")
+__version__ = "0.1.1"
 
 
 def _exit_handler():
@@ -45,8 +42,8 @@ def _shorten_url(url):
     return res.headers['Location']
 
 
-def _post_gist(gist_json):
-    auth = {'Authorization': 'token ' + GIST_TOKEN}
+def _post_gist(gist_token, gist_json):
+    auth = {'Authorization': 'token ' + gist_token}
 
     res = requests.post('https://api.github.com/gists',
                         headers=auth, data=gist_json)
@@ -58,7 +55,7 @@ def _post_gist(gist_json):
     return content['html_url']
 
 
-def _create_gist(description, public, files):
+def _create_gist(gist_token, description, public, files):
     gist = {"description": description,
             "public": public,
             "files": {}
@@ -67,7 +64,7 @@ def _create_gist(description, public, files):
     for key, value in iteritems(files):
         gist['files'][key] = {'content': value}
 
-    return _post_gist(json.dumps(gist))
+    return _post_gist(gist_token, json.dumps(gist))
 
 
 def _get_args():
@@ -88,6 +85,8 @@ def _get_args():
                         help='long url, will not shorten')
     parser.add_argument('-nl', default=False, action='store_true',
                         help='suppress newline after url, good for xclip')
+    parser.add_argument('-v', action='version', version='%(prog)s ' +
+                                                        __version__)
     parser.epilog = """Examples:
     $ quickgist file.txt
     $ quickgist -d "some files" file.txt src/*.py
@@ -104,6 +103,13 @@ Notes:
 
 
 def _process(args):
+    gist_token = ""
+    try:
+        gist_token = os.environ['GIST_TOKEN']
+    except KeyError:
+        sys.exit("Error: please set $GIST_TOKEN to your GitHub personal "
+                 "access token.")
+
     file_map = OrderedDict()
 
     if args.sources:
@@ -127,7 +133,7 @@ def _process(args):
         file_map[args.f] = contents
 
     if file_map:
-        return _create_gist(args.d, not args.p, file_map)
+        return _create_gist(gist_token, args.d, not args.p, file_map)
     else:
         sys.exit("Error: The source file(s) you specified is empty.")
 
