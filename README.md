@@ -5,9 +5,9 @@ specified as the sources argument or piped in via stdin. URLs are
 automatically shortened with git.io.
 
 ```
-usage: quickgist [-h] [-f F] [-d D] [-p P] [sources [sources ...]]
+usage: quickgist [-h] [-f F] [-d D] [-p] [-l] [-nl] [sources [sources ...]]
 
-quick gist posting tool
+quickgist is a simple command line tool for creating gists.
 
 positional arguments:
   sources     gist content sources, ex: test.txt, test1.txt test2.txt,
@@ -18,7 +18,9 @@ optional arguments:
   -f F        gist filename, only used for stdin or to override single input
               filename
   -d D        gist description
-  -p P        private gist
+  -p          private gist
+  -l          long url, will not shorten
+  -nl         suppress newline after url, good for xclip
 ```
 
 Examples:
@@ -29,8 +31,8 @@ Examples:
     $ xclip -sel c -o | quickgist
     $ quickgist -nl -d "markdown" *.md | xclip -sel c
 
-Notes:
-    Please define an environment variable GIST_TOKEN with your
-    GitHub personal access token.
+Notes: Please define an environment variable GIST_TOKEN with your GitHub
+personal access token.
 
     $ export GIST_TOKEN="YOUR_TOKEN_HERE"
+

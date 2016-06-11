@@ -69,7 +69,8 @@ def _create_gist(description, public, files):
 
 def _get_args():
     parser = ArgumentParser(prog='quickgist',
-                            description='quick gist posting tool',
+                            description='quickgist is a simple command line '
+                                        'tool for creating gists.',
                             formatter_class=RawDescriptionHelpFormatter)
     parser.add_argument('sources', nargs='*',
                         help='gist content sources, ex: test.txt, '
